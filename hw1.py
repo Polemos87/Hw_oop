@@ -18,6 +18,11 @@ class Student:
         else:
             return 'Ошибка'
 
+    def __lt__ (self, other):
+        if not isinstance( other, Student):
+            print (f'не является студентом')
+            return
+        return sum(self.grades['Python']) > sum(other.grades['Python'])
 
     def __str__(self):
         res = (f'''Имя: {self.name}\nФамилия: {self.surname}
@@ -39,10 +44,16 @@ class Lecturer(Mentor):
             super().__init__(name, surname)
             self.grades = {}
             self.list_lecturers.append(self)
+
     def __str__(self):
         res = f'''Имя: {self.name}\nФамилия: {self.surname}\nСредняя оценка за лекции: {count_average_grade(self)}\n'''
         return res
 
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer):
+            print(f'не является лектором')
+            return
+        return sum(self.grades['Python']) > sum(other.grades['Python'])
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
@@ -113,10 +124,10 @@ reviewer_1.rate_hw(student_2, 'Python', 7)
 reviewer_1.rate_hw(student_1, 'Python', 10)
 reviewer_1.rate_hw(student_2, 'C++', 10)
 
-student_2.rate_lecture(lecturer_1, 'C++', 10)
+student_2.rate_lecture(lecturer_1, 'Python', 10)
 student_2.rate_lecture(lecturer_1, 'Python', 9)
 student_2.rate_lecture(lecturer_1, 'C++', 7)
-student_1.rate_lecture(lecturer_1, 'Python', 8)
+student_1.rate_lecture(lecturer_2, 'Python', 8)
 student_2.rate_lecture(lecturer_1, 'C++', 10)
 
 print(student_1)
@@ -125,5 +136,9 @@ print(reviewer_1)
 
 count_grade_students(Student.list_students, 'Python')
 count_grade_lecturers(Lecturer.list_lecturers, 'Python')
+
+print(student_1 < student_2)
+print(lecturer_1 < lecturer_2)
+
 
 
