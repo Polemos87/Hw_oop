@@ -22,7 +22,7 @@ class Student:
         if not isinstance( other, Student):
             print (f'не является студентом')
             return
-        return sum(self.grades['Python']) > sum(other.grades['Python'])
+        return sum(self.grades['Python']) / len(self.grades['Python']) > sum(other.grades['Python']) / len(self.grades['Python'])
 
     def __str__(self):
         res = (f'''Имя: {self.name}\nФамилия: {self.surname}
@@ -53,7 +53,7 @@ class Lecturer(Mentor):
         if not isinstance(other, Lecturer):
             print(f'не является лектором')
             return
-        return sum(self.grades['Python']) > sum(other.grades['Python'])
+        return sum(self.grades['Python']) / len(self.grades['Python']) > sum(other.grades['Python']) / len(other.grades['Python'])
 
 class Reviewer(Mentor):
     def rate_hw(self, student, course, grade):
@@ -137,8 +137,8 @@ print(reviewer_1)
 count_grade_students(Student.list_students, 'Python')
 count_grade_lecturers(Lecturer.list_lecturers, 'Python')
 
-print(student_1 < student_2)
+print(student_1 > student_2)
 print(lecturer_1 < lecturer_2)
-
+print(sum(student_1.grades['Python'])/len(student_1.grades['Python']))
 
 
