@@ -139,6 +139,6 @@ count_grade_lecturers(Lecturer.list_lecturers, 'Python')
 
 print(student_1 > student_2)
 print(lecturer_1 < lecturer_2)
-print(sum(student_1.grades['Python'])/len(student_1.grades['Python']))
+
 
 
